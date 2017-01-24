@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIController : MonoBehaviour {
 
     public Object centreText;
+    Object instanceText;
 
 	// Use this for initialization
 	void Start () {
@@ -18,10 +19,11 @@ public class UIController : MonoBehaviour {
 
     public void PrintCenteredText ()
     {
+        instanceText = Instantiate(centreText);
+    }
 
-        print("doin it!");
-        Instantiate(centreText);
-
-
+    public void RemoveCenteredText ()
+    {
+        Destroy(instanceText);
     }
 }

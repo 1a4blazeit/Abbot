@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MasterController : MonoBehaviour {
 
+    public Object thumbs;
+
 	// Use this for initialization
 	void Start () {
         GameObject.Find("UIModel").GetComponent<UIController>().PrintCenteredText();
@@ -11,6 +13,11 @@ public class MasterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown("return"))
+        {
+            GameObject.Find("UIModel").GetComponent<UIController>().RemoveCenteredText();
+            Instantiate(thumbs);
+        }
 	}
+
 }
