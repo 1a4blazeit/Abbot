@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     float speed;
     bool exist;
     bool grounded;
+    int jumping;
     Vector3 move;
 
 
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour {
         speed = 0.1f;
         exist = false;
         grounded = false;
+        jumping = 0;
     }
 
     // Update is called once per frame
@@ -37,9 +39,19 @@ public class PlayerController : MonoBehaviour {
             if (rb.velocity.y == 0) grounded = true;
             else grounded = false;
 
-            if (Input.GetKeyDown("space") && grounded)
+            if (Input.GetKeyDown("space") && grounded && (jumping == 0)) //if on the ground, initiate jump when space pressed
             {
-                rb.AddForce(new Vector2(0, 500));
+                jumping = 10;
+                rb.AddForce(new Vector2(0, 6*jumping));
+            }
+            else if (Input.GetKey("space") && (jumping > 0)) //if in midair and holding space, extend the jump
+            {
+                jumping = jumping - 1;
+                rb.AddForce(new Vector2(0, 6*jumping));
+            }
+            else if ((jumping != 0))//when space is released stop extending jump
+            {
+                jumping = 0;
             }
         }
     }
