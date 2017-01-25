@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class textScript : MonoBehaviour {
+public class TextScript : MonoBehaviour {
     Text contents;
     public string to_write;
 

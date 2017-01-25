@@ -21,7 +21,7 @@ public class UIController : MonoBehaviour {
     public void PrintCenteredText (string message)
     {
         instanceText = Instantiate(centreText);
-        instanceText.GetComponentInChildren<textScript>().to_write = message;
+        instanceText.GetComponentInChildren<TextScript>().to_write = message;
     }
 
     public void RemoveCenteredText ()

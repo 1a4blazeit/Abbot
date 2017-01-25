@@ -16,7 +16,7 @@ public class MasterController : MonoBehaviour {
 		if (Input.GetKeyDown("return"))
         {
             GameObject.Find("UIModel").GetComponent<UIController>().RemoveCenteredText();
-            Instantiate(thumbs);
+            GameObject.Find("PlayerModel").GetComponent<PlayerController>().CreatePlayer();
         }
 	}
 
