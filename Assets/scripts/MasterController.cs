@@ -8,7 +8,7 @@ public class MasterController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameObject.Find("UIModel").GetComponent<UIController>().PrintCenteredText();
+        GameObject.Find("UIModel").GetComponent<UIController>().PrintCenteredText("Press Enter!");
 	}
 	
 	// Update is called once per frame
