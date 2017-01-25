@@ -15,13 +15,13 @@ public class PlayerController : MonoBehaviour {
     Vector3 move;
 
 
-
     // Use this for initialization
     void Start() {
         speed = 0.1f;
         exist = false;
         grounded = false;
         jumping = 0;
+
     }
 
     // Update is called once per frame
@@ -36,25 +36,26 @@ public class PlayerController : MonoBehaviour {
             move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
             transform.position += move * speed;
 
-            if (rb.velocity.y == 0) grounded = true;
-            else grounded = false;
+       
 
-            if (Input.GetKeyDown("space") && grounded && (jumping == 0)) //if on the ground, initiate jump when space pressed
+            if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.5f, -0.6f, 0)), (new Vector3(1, 0, 0)), 1.0f)))//if on the ground, initiate jump when space pressed
             {
-                jumping = 10;
-                rb.AddForce(new Vector2(0, 6*jumping));
+                jumping = 9;
+                rb.AddForce(new Vector2(0, 9*jumping));
             }
-            else if (Input.GetKey("space") && (jumping > 0)) //if in midair and holding space, extend the jump
+            else if (Input.GetKey("z") && (jumping > 0)) //if in midair and holding space, extend the jump
             {
                 jumping = jumping - 1;
-                rb.AddForce(new Vector2(0, 6*jumping));
+                rb.AddForce(new Vector2(0, 9*jumping));
             }
-            else if ((jumping != 0))//when space is released stop extending jump
+            else 
             {
                 jumping = 0;
             }
         }
     }
+
+
 
     public void CreatePlayer()
     {
@@ -65,5 +66,8 @@ public class PlayerController : MonoBehaviour {
 
         rb.freezeRotation = true;
         exist = true;
+
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb.interpolation = RigidbodyInterpolation2D.Extrapolate;
     }
 }
