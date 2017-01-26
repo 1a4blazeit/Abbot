@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MasterController : MonoBehaviour {
 
-    public Object thumbs;
+    public GameObject floor;
+	
+	
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +19,8 @@ public class MasterController : MonoBehaviour {
         {
             GameObject.Find("UIModel").GetComponent<UIController>().RemoveCenteredText();
             GameObject.Find("PlayerModel").GetComponent<PlayerController>().CreatePlayer();
+			
+			Instantiate(floor);
         }
 	}
 
