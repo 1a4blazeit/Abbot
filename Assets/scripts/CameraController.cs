@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		if(mobile) {
 			transform.position += new Vector3(0, 0.02f, 0);
 		}
