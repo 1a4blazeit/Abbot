@@ -5,23 +5,25 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public Sprite playerSprite;
+	public PhysicsMaterial2D playerMaterial;
     SpriteRenderer sr;
     BoxCollider2D bc;
     Rigidbody2D rb;
     float speed;
     bool exist;
     int jumping;
-    Vector3 move;
+    float move;
 	
-	static int JUMP_START = 9;
+	static int JUMP_START = 10;
 	static float JUMP_MULTI = 9.0f;
 
 
     // Use this for initialization
     void Start() {
-        speed = 0.1f;
+        speed = 5f;
         exist = false;
         jumping = 0;
+
 
     }
 
@@ -31,28 +33,28 @@ public class PlayerController : MonoBehaviour {
     {
         if (exist)
         {
-            move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
-            transform.position += move * speed;
-
-       
-
+            move = Input.GetAxisRaw("Horizontal");
+			
             if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.5f, -0.6f, 0)), (new Vector3(-1, 0, 0)), 1.0f)))//if on the ground, initiate jump when space pressed
             {
                 jumping = JUMP_START;
-                rb.AddForce(new Vector2(0, JUMP_MULTI*jumping));
             }
-            else if (Input.GetKey("z") && (jumping > 0)) //if in midair and holding jump, extend the jump
-            {
-                jumping = jumping - 1;
-                rb.AddForce(new Vector2(0, JUMP_MULTI*jumping));
-            }
-            else 
-            {
-                jumping = 0;
-            }
+			else if (!Input.GetKey("z")) jumping = 0;
+
 			 
         }
     }
+	
+	void FixedUpdate() {
+		if (exist) {
+			rb.velocity = new Vector3(move * speed, Mathf.Clamp(rb.velocity.y, -100f, 9f), 0);
+			
+			if(jumping > 0) {
+				rb.AddForce(new Vector3(0, 1, 0) * JUMP_MULTI * jumping);
+				jumping--;
+			}
+		}
+	}
 
 
 
@@ -63,6 +65,7 @@ public class PlayerController : MonoBehaviour {
         sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = playerSprite;
         bc = gameObject.AddComponent<BoxCollider2D>();
+		bc.sharedMaterial = playerMaterial;
         rb = gameObject.AddComponent<Rigidbody2D>();
 
         rb.freezeRotation = true;
