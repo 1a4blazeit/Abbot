@@ -7,18 +7,41 @@ public class LevelController : MonoBehaviour {
 	public GameObject floor;
 	GameObject[] floorInstance;
 	
+	bool live;
+	
+	
 	int nextFloor; //track the next array slot that should be used when generating new floors
 	int floorHeight; //track the height of the next floor
-	int killPlane; //track the point at which the player should die, as they have no chance of reaching the bottom floor
+	public int killPlane; //track the point at which the player should die, as they have no chance of reaching the bottom floor
 	int floorHoriz; //temp until random put in; determines next floor horizontal placement
 
 	// Use this for initialization
 	void Start () {
 		floorInstance = new GameObject[5];
+		live = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+
+	
+	void Update() {
+		if(live && floorInstance[nextFloor].GetComponent<Transform>().position.y < GameObject.Find("CameraModel").GetComponent<Transform>().position.y - 7) {
+			makePlatform();
+		}
+	}
+	
+	//deletes the bottom platform and and makes a new one at the top of the "ladder"
+	public void makePlatform() {
+		Destroy(floorInstance[nextFloor]);
+		
+		floorInstance[nextFloor] = Instantiate(floor) as GameObject;
+		floorInstance[nextFloor].GetComponent<Transform>().position = new Vector3(floorHoriz - 4, floorHeight, 0);
+		
+		floorHoriz = (floorHoriz + 4) % 12;
+		floorHeight = floorHeight + 3;
+		killPlane = killPlane + 3;
+		
+		nextFloor = (nextFloor + 1) % 5;
 		
 	}
 	
@@ -37,6 +60,8 @@ public class LevelController : MonoBehaviour {
 			floorHeight = floorHeight + 3;
 		}
 		
+		live = true;
+		
 		
 	}
 	
@@ -44,5 +69,6 @@ public class LevelController : MonoBehaviour {
 		for(int i = 0; i < 5; i++) {
 			Destroy(floorInstance[i]);
 		}
+		live = false;
 	}
 }

@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour {
             {
                 jumping = 0;
             }
+			 
         }
     }
 

@@ -5,11 +5,14 @@ using UnityEngine;
 public class MasterController : MonoBehaviour {
 	
 	bool begun;
+	
+	string startMessage;
 
 	// Use this for initialization
 	void Start () {
+		startMessage = "Press Enter!";
 		begun = false;
-        GameObject.Find("UIModel").GetComponent<UIController>().PrintCenteredText("Press Enter!");
+        GameObject.Find("UIModel").GetComponent<UIController>().PrintCenteredText(startMessage);
 	}
 	
 	// Update is called once per frame
@@ -29,9 +32,19 @@ public class MasterController : MonoBehaviour {
 		}
 	}
 	
+	void FixedUpdate() {
+		if(begun) {
+			if(GameObject.Find("PlayerModel").GetComponent<Transform>().position.y < GameObject.Find("LevelModel").GetComponent<LevelController>().killPlane) {
+				startMessage = "You died!";
+				OnReset();
+			}
+		}
+	}
+	
 	void OnReset () { //reset gamestate to start position
 		begun = false;
-		GameObject.Find("UIModel").GetComponent<UIController>().PrintCenteredText("Press Enter!");
+		GameObject.Find("UIModel").GetComponent<UIController>().PrintCenteredText(startMessage);
+		startMessage = "Press Enter!";
 		
 		GameObject.Find("PlayerModel").GetComponent<PlayerController>().ResetPlayer();
 		
@@ -39,6 +52,7 @@ public class MasterController : MonoBehaviour {
 		
 		GameObject.Find("CameraModel").GetComponent<CameraController>().mobile = false;
 		GameObject.Find("CameraModel").GetComponent<Transform>().position = new Vector3(0,0,-10);
+		
 		
 	}
 
