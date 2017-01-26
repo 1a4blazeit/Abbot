@@ -5,6 +5,7 @@ using UnityEngine;
 public class MasterController : MonoBehaviour {
 
     public GameObject floor;
+	GameObject floorInstance;
 	
 	
 
@@ -20,7 +21,8 @@ public class MasterController : MonoBehaviour {
             GameObject.Find("UIModel").GetComponent<UIController>().RemoveCenteredText();
             GameObject.Find("PlayerModel").GetComponent<PlayerController>().CreatePlayer();
 			
-			Instantiate(floor);
+			floorInstance = Instantiate(floor);
+			floorInstance.GetComponent<Transform>().position = new Vector3(0, -2, 0);
         }
 	}
 

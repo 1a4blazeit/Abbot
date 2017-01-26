@@ -10,16 +10,17 @@ public class PlayerController : MonoBehaviour {
     Rigidbody2D rb;
     float speed;
     bool exist;
-    bool grounded;
     int jumping;
     Vector3 move;
+	
+	static int JUMP_START = 9;
+	static float JUMP_MULTI = 9.0f;
 
 
     // Use this for initialization
     void Start() {
         speed = 0.1f;
         exist = false;
-        grounded = false;
         jumping = 0;
 
     }
@@ -40,13 +41,13 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.5f, -0.6f, 0)), (new Vector3(1, 0, 0)), 1.0f)))//if on the ground, initiate jump when space pressed
             {
-                jumping = 9;
-                rb.AddForce(new Vector2(0, 9*jumping));
+                jumping = JUMP_START;
+                rb.AddForce(new Vector2(0, JUMP_MULTI*jumping));
             }
             else if (Input.GetKey("z") && (jumping > 0)) //if in midair and holding space, extend the jump
             {
                 jumping = jumping - 1;
-                rb.AddForce(new Vector2(0, 9*jumping));
+                rb.AddForce(new Vector2(0, JUMP_MULTI*jumping));
             }
             else 
             {
