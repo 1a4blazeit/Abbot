@@ -39,12 +39,12 @@ public class PlayerController : MonoBehaviour {
 
        
 
-            if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.5f, -0.6f, 0)), (new Vector3(1, 0, 0)), 1.0f)))//if on the ground, initiate jump when space pressed
+            if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.5f, -0.6f, 0)), (new Vector3(-1, 0, 0)), 1.0f)))//if on the ground, initiate jump when space pressed
             {
                 jumping = JUMP_START;
                 rb.AddForce(new Vector2(0, JUMP_MULTI*jumping));
             }
-            else if (Input.GetKey("z") && (jumping > 0)) //if in midair and holding space, extend the jump
+            else if (Input.GetKey("z") && (jumping > 0)) //if in midair and holding jump, extend the jump
             {
                 jumping = jumping - 1;
                 rb.AddForce(new Vector2(0, JUMP_MULTI*jumping));
@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour {
 
     public void CreatePlayer()
     {
+		
+		gameObject.transform.position = new Vector3(0, 0, 0);
         sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = playerSprite;
         bc = gameObject.AddComponent<BoxCollider2D>();
@@ -71,4 +73,11 @@ public class PlayerController : MonoBehaviour {
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Extrapolate;
     }
+	
+	public void ResetPlayer() {
+		Destroy(sr);
+		Destroy(bc);
+		Destroy(rb);
+		exist = false;
+	}
 }
