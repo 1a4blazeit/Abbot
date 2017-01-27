@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour {
     int jumping;
     float move;
 	
-	static int JUMP_START = 10;
-	static float JUMP_MULTI = 11f;
+	static int JUMP_START = 14;
+	static float JUMP_MULTI = 12f;
 
 
     // Use this for initialization

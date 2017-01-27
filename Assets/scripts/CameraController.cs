@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour {
 	public bool mobile;
 	public bool advance;
 	public bool retreat;
+	public bool up;
+	public bool down;
 
 	// Use this for initialization
 	void Start () {
@@ -35,11 +37,32 @@ public class CameraController : MonoBehaviour {
 				retreat = false;
 			}
 			
+			if((GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y > 3)) {
+				up = true;
+			}
+			else if (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y < 1) {
+				up = false;
+			}
+			
+			if((gameObject.transform.position.y > 0.5) && (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y <= -1)) {
+				down = true;
+			}
+			else if ((gameObject.transform.position.y <= 0.5) || (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y > -1)) {
+				down = false;
+			}
+			
 			if(advance) {
 				gameObject.transform.position += new Vector3 (0.08f, 0, 0);
 			}
 			else if(retreat) {
 				gameObject.transform.position -= new Vector3 (0.08f, 0, 0);
+			}
+			
+			if(up) {
+				gameObject.transform.position += new Vector3 (0, 0.08f, 0);
+			}
+			else if (down) {
+				gameObject.transform.position -= new Vector3 (0, 0.08f, 0);
 			}
 		
 		}
