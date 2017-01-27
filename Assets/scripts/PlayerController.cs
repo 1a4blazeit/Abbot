@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     float move;
 	
 	static int JUMP_START = 10;
-	static float JUMP_MULTI = 9.0f;
+	static float JUMP_MULTI = 11f;
 
 
     // Use this for initialization
@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour {
         exist = true;
 
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.interpolation = RigidbodyInterpolation2D.Extrapolate;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+		
     }
 	
 	public void ResetPlayer() {

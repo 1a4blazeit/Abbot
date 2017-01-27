@@ -12,9 +12,9 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void LateUpdate () {
 		if(mobile) {
-			transform.position += new Vector3(0, 0.02f, 0);
+			transform.position = new Vector3(GameObject.Find("PlayerModel").GetComponent<Transform>().position.x, 0, -10);
 		}
 	}
 }
