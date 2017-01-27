@@ -23,6 +23,8 @@ public class MasterController : MonoBehaviour {
             GameObject.Find("PlayerModel").GetComponent<PlayerController>().CreatePlayer();
 			GameObject.Find("LevelModel").GetComponent<LevelController>().GenerateLevel();
 			GameObject.Find("CameraModel").GetComponent<CameraController>().mobile = true;
+			GameObject.Find("CameraModel").GetComponent<CameraController>().advance = false;
+			GameObject.Find("CameraModel").GetComponent<CameraController>().retreat = false;
 			begun = true;
 
         }

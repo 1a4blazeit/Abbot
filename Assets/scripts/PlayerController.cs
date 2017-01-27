@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
     public void CreatePlayer()
     {
 		
-		gameObject.transform.position = new Vector3(0, 0, 0);
+		gameObject.transform.position = new Vector3(-8.5f, 0, 0);
         sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = playerSprite;
         bc = gameObject.AddComponent<BoxCollider2D>();
@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour {
 
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+		
 		
     }
 	
