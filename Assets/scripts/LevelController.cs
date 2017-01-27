@@ -6,6 +6,8 @@ public class LevelController : MonoBehaviour {
 
 	public GameObject floor;
 	GameObject[] floorInstance;
+	public GameObject tile;
+	GameObject tileInstance;
 	
 	bool live;
 	
