@@ -25,6 +25,8 @@ public class MasterController : MonoBehaviour {
 			GameObject.Find("CameraModel").GetComponent<CameraController>().mobile = true;
 			GameObject.Find("CameraModel").GetComponent<CameraController>().advance = false;
 			GameObject.Find("CameraModel").GetComponent<CameraController>().retreat = false;
+			GameObject.Find("CameraModel").GetComponent<CameraController>().up = false;
+			GameObject.Find("CameraModel").GetComponent<CameraController>().down = false;
 			begun = true;
 
         }

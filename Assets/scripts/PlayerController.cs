@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour {
     public Sprite playerSprite;
 	public PhysicsMaterial2D playerMaterial;
     SpriteRenderer sr;
-    BoxCollider2D bc;
     Rigidbody2D rb;
     float speed;
     bool exist;
@@ -64,8 +63,6 @@ public class PlayerController : MonoBehaviour {
 		gameObject.transform.position = new Vector3(-8.5f, 0, 0);
         sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = playerSprite;
-        bc = gameObject.AddComponent<BoxCollider2D>();
-		bc.sharedMaterial = playerMaterial;
         rb = gameObject.AddComponent<Rigidbody2D>();
 
         rb.freezeRotation = true;
@@ -79,7 +76,6 @@ public class PlayerController : MonoBehaviour {
 	
 	public void ResetPlayer() {
 		Destroy(sr);
-		Destroy(bc);
 		Destroy(rb);
 		exist = false;
 	}

@@ -23,21 +23,21 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		if (mobile) {
-			if(GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x > 3) {
+			if(GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x > 2) {
 				advance = true;
 			}
 			else if (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x < 1) {
 				advance = false;
 			}
 			
-			if((gameObject.transform.position.x > 0) && (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x < -3)) {
+			if((gameObject.transform.position.x > 0) && (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x < -2)) {
 				retreat = true;
 			}
 			else if ((gameObject.transform.position.x <= 0) || (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x > -1)) {
 				retreat = false;
 			}
 			
-			if((GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y > 3)) {
+			if((GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y > 2)) {
 				up = true;
 			}
 			else if (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y < 1) {
@@ -59,10 +59,10 @@ public class CameraController : MonoBehaviour {
 			}
 			
 			if(up) {
-				gameObject.transform.position += new Vector3 (0, 0.08f, 0);
+				gameObject.transform.position += new Vector3 (0, 0.1f, 0);
 			}
 			else if (down) {
-				gameObject.transform.position -= new Vector3 (0, 0.08f, 0);
+				gameObject.transform.position -= new Vector3 (0, 0.1f, 0);
 			}
 		
 		}
