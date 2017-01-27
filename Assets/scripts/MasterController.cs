@@ -59,5 +59,10 @@ public class MasterController : MonoBehaviour {
 		
 		
 	}
+	
+	public void FinishedLevel() {
+		startMessage = "You did it!";
+		OnReset();
+	}
 
 }
