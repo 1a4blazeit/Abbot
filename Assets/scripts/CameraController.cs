@@ -51,18 +51,15 @@ public class CameraController : MonoBehaviour {
 				down = false;
 			}
 			
-			if(advance) {
-				gameObject.transform.position += new Vector3 (0.08f, 0, 0);
-			}
-			else if(retreat) {
-				gameObject.transform.position -= new Vector3 (0.08f, 0, 0);
+			if(advance || retreat) {
+				gameObject.transform.position += new Vector3 (0.045f * (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x), 0, 0);
 			}
 			
 			if(up) {
-				gameObject.transform.position += new Vector3 (0, 0.1f, 0);
+				gameObject.transform.position += new Vector3 (0, 0.2f, 0);
 			}
 			else if (down) {
-				gameObject.transform.position -= new Vector3 (0, 0.1f, 0);
+				gameObject.transform.position -= new Vector3 (0, 0.2f, 0);
 			}
 		
 		}
