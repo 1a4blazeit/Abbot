@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
         {
             move = Input.GetAxisRaw("Horizontal");
 			
-            if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.5f, -0.6f, 0)), (new Vector3(-1, 0, 0)), 1.0f)))//if on the ground, initiate jump when space pressed
+            if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.375f, -0.6f, 0)), (new Vector3(-1, 0, 0)), 0.75f)))//if on the ground, initiate jump when space pressed
             {
                 jumping = JUMP_START;
                 ceilingHead = false;
