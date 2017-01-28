@@ -22,11 +22,7 @@ public class MasterController : MonoBehaviour {
             GameObject.Find("UIModel").GetComponent<UIController>().RemoveCenteredText();
             GameObject.Find("PlayerModel").GetComponent<PlayerController>().CreatePlayer();
 			GameObject.Find("LevelModel").GetComponent<LevelController>().GenerateLevel();
-			GameObject.Find("CameraModel").GetComponent<CameraController>().mobile = true;
-			GameObject.Find("CameraModel").GetComponent<CameraController>().advance = false;
-			GameObject.Find("CameraModel").GetComponent<CameraController>().retreat = false;
-			GameObject.Find("CameraModel").GetComponent<CameraController>().up = false;
-			GameObject.Find("CameraModel").GetComponent<CameraController>().down = false;
+            GameObject.Find("CameraModel").GetComponent<CameraController>().ReadyCamera();
 			begun = true;
 
         }
@@ -37,13 +33,13 @@ public class MasterController : MonoBehaviour {
 	}
 	
 	void FixedUpdate() {
-		if(begun) {
-			if(GameObject.Find("PlayerModel").GetComponent<Transform>().position.y < GameObject.Find("LevelModel").GetComponent<LevelController>().killPlane) {
-				startMessage = "You died!";
-				OnReset();
-			}
-		}
 	}
+
+    public void DeathRequest()
+    {
+        startMessage = "You died!";
+        OnReset();
+    }
 	
 	void OnReset () { //reset gamestate to start position
 		begun = false;
@@ -54,8 +50,7 @@ public class MasterController : MonoBehaviour {
 		
 		GameObject.Find("LevelModel").GetComponent<LevelController>().DeleteLevel();
 		
-		GameObject.Find("CameraModel").GetComponent<CameraController>().mobile = false;
-		GameObject.Find("CameraModel").GetComponent<Transform>().position = new Vector3(0,0,-10);
+		GameObject.Find("CameraModel").GetComponent<CameraController>().ResetCamera();
 		
 		
 	}

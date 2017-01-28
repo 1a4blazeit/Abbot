@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 	
-	public bool mobile;
-	public bool advance;
-	public bool retreat;
-	public bool up;
-	public bool down;
+	bool mobile;
+	bool advance;
+	bool retreat;
+	bool up;
+	bool down;
+
+    Vector3 playerPosition;
+
 
 	// Use this for initialization
 	void Start () {
 		mobile = false;
 		advance = false;
+        retreat = false;
+        up = false;
+        down = false;
 	}
 	
 	void FixedUpdate () {
@@ -23,40 +29,43 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
         if (mobile) {
-            if (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x > 2) {
+            playerPosition = GameObject.Find("PlayerModel").GetComponent<Transform>().position;
+
+
+            if (playerPosition.x - gameObject.transform.position.x > 2) {
                 advance = true;
             }
-            else if (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x < 1) {
+            else if (playerPosition.x - gameObject.transform.position.x < 1) {
                 advance = false;
             }
 
-            if ((gameObject.transform.position.x > 0) && (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x < -2)) {
+            if ((gameObject.transform.position.x > 0) && (playerPosition.x - gameObject.transform.position.x < -2)) {
                 retreat = true;
             }
-            else if ((gameObject.transform.position.x <= 0) || (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x > -1)) {
+            else if ((gameObject.transform.position.x <= 0) || (playerPosition.x - gameObject.transform.position.x > -1)) {
                 retreat = false;
             }
 
-            if ((GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y > 2)) {
+            if (playerPosition.y - gameObject.transform.position.y > 2) {
                 up = true;
             }
-            else if (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y < 1) {
+            else if (playerPosition.y - gameObject.transform.position.y < 1) {
                 up = false;
             }
 
-            if ((gameObject.transform.position.y > 0.5) && (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y <= -1)) {
+            if ((gameObject.transform.position.y > 0.5) && (playerPosition.y - gameObject.transform.position.y <= -1)) {
                 down = true;
             }
-            else if ((gameObject.transform.position.y <= 0.5) || (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y - gameObject.transform.position.y > -1)) {
+            else if ((gameObject.transform.position.y <= 0.5) || (playerPosition.y - gameObject.transform.position.y > -1)) {
                 down = false;
             }
 
             if (advance) {
-                gameObject.transform.position += new Vector3(Mathf.Clamp(0.045f * (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x), 0.07f, 1.5f), 0, 0);
+                gameObject.transform.position += new Vector3(Mathf.Clamp(0.045f * (playerPosition.x - gameObject.transform.position.x), 0.07f, 1.5f), 0, 0);
             }
             else if (retreat)
             {
-                gameObject.transform.position += new Vector3(Mathf.Clamp(0.045f * (GameObject.Find("PlayerModel").GetComponent<Transform>().position.x - gameObject.transform.position.x), -1.5f, -0.07f), 0, 0);
+                gameObject.transform.position += new Vector3(Mathf.Clamp(0.045f * (playerPosition.x - gameObject.transform.position.x), -1.5f, -0.07f), 0, 0);
             }
 			
 			if(up) {
@@ -68,4 +77,19 @@ public class CameraController : MonoBehaviour {
 		
 		}
 	}
+
+    public void ReadyCamera()
+    {
+        mobile = true;
+        advance = false;
+        retreat = false;
+        up = false;
+        down = false;
+    }
+
+    public void ResetCamera()
+    {
+        mobile = false;
+        gameObject.transform.position = new Vector3(0, 0, -10);
+    }
 }

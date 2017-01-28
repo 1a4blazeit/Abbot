@@ -26,31 +26,21 @@ public class LevelController : MonoBehaviour {
 		floorInstance = new GameObject[5];
 		live = false;
 	}
-	
-	// Update is called once per frame
 
-	
-	void Update() {
+    // Update is called once per frame
 
-	}
+
+    void Update()
+    {
+        if (live) { 
+            if (GameObject.Find("PlayerModel").GetComponent<Transform>().position.y < killPlane)
+            {
+                GameObject.Find("MasterModel").GetComponent<MasterController>().DeathRequest();
+            }
+        }   
+    }
 	
 	//deletes the bottom platform and and makes a new one at the top of the "ladder"
-	public void makePlatform() {
-		Destroy(floorInstance[nextFloor]);
-		
-		floorInstance[nextFloor] = Instantiate(floor) as GameObject;
-		floorInstance[nextFloor].GetComponent<Transform>().position = new Vector3(floorHoriz - 4, floorHeight, 0);
-		floorInstance[nextFloor].GetComponent<Transform>().localScale = new Vector3(platformWidth, 1, 1);
-		
-		floorHoriz = (floorHoriz + 4) % 12;
-		floorHeight = floorHeight + 3;
-		killPlane = killPlane + 3;
-		
-		nextFloor = (nextFloor + 1) % 5;
-		
-		platformWidth = platformWidth * 0.9f;
-		
-	}
 	
 	public void GenerateLevel () {
 		
