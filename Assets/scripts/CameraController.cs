@@ -61,19 +61,20 @@ public class CameraController : MonoBehaviour {
             }
 
             if (advance) {
-                gameObject.transform.position += new Vector3(Mathf.Clamp(0.045f * (playerPosition.x - gameObject.transform.position.x), 0.07f, 1.5f), 0, 0);
+                gameObject.transform.position += new Vector3(Mathf.Clamp(1.9f * (playerPosition.x - gameObject.transform.position.x) * Time.deltaTime, 0.07f, 1.5f), 0, 0);
             }
             else if (retreat)
             {
-                gameObject.transform.position += new Vector3(Mathf.Clamp(0.045f * (playerPosition.x - gameObject.transform.position.x), -1.5f, -0.07f), 0, 0);
+                gameObject.transform.position += new Vector3(Mathf.Clamp(1.9f * (playerPosition.x - gameObject.transform.position.x) * Time.deltaTime, -1.5f, -0.07f), 0, 0);
             }
 			
 			if(up) {
-				gameObject.transform.position += new Vector3 (0, 0.11f, 0);
+				gameObject.transform.position += new Vector3 (0, 5f * Time.deltaTime, 0);
 			}
 			else if (down) {
-				gameObject.transform.position -= new Vector3 (0, 0.11f, 0);
+				gameObject.transform.position -= new Vector3 (0, 5f * Time.deltaTime, 0);
 			}
+
 		
 		}
 	}
