@@ -38,6 +38,7 @@ public class MasterController : MonoBehaviour {
     public void DeathRequest()
     {
         startMessage = "You died!";
+        GameObject.Find("AudioModel").GetComponent<AudioController>().PlayDie();
         OnReset();
     }
 	
@@ -57,7 +58,8 @@ public class MasterController : MonoBehaviour {
 	
 	public void FinishedLevel() {
 		startMessage = "You did it!";
-		OnReset();
+        GameObject.Find("AudioModel").GetComponent<AudioController>().PlayWin();
+        OnReset();
 	}
 
 }

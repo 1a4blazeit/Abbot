@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
             {
                 jumping = JUMP_START;
                 ceilingHead = false;
+                GameObject.Find("AudioModel").GetComponent<AudioController>().PlayJump();
             }
 			else if (!Input.GetKey("z")) jumping = 0;
             else if (rb.velocity.y <= 0)
