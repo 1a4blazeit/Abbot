@@ -6,13 +6,16 @@ public class PlayerController : MonoBehaviour {
 
     public Sprite playerSprite;
 	public PhysicsMaterial2D playerMaterial;
+    public RuntimeAnimatorController playerAnimation;
     SpriteRenderer sr;
     Rigidbody2D rb;
+    Animator an;
     float speed;
     bool exist;
     int jumping;
     float move;
     bool ceilingHead;
+    int currentAnimationState;
 	
 	static int JUMP_START = 14;
 	static float JUMP_MULTI = 12f;
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour {
         exist = false;
         jumping = 0;
         ceilingHead = false;
+        currentAnimationState = 0;
 
 
     }
@@ -35,6 +39,17 @@ public class PlayerController : MonoBehaviour {
         if (exist)
         {
             move = Input.GetAxisRaw("Horizontal");
+            if (Input.GetKey("right"))
+            {
+                ChangeState(1);
+                gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
+            else if (Input.GetKey("left"))
+            {
+                ChangeState(1);
+                gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
+            else ChangeState(0);
 			
             if (Input.GetKeyDown("z") && (jumping == 0) && (Physics2D.Raycast(gameObject.transform.position + (new Vector3(0.375f, -0.6f, 0)), (new Vector3(-1, 0, 0)), 0.75f)))//if on the ground, initiate jump when space pressed
             {
@@ -64,6 +79,16 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+    void ChangeState(int state)
+    {
+        if (currentAnimationState == state) return;
+
+        else {
+            gameObject.GetComponent<Animator>().SetInteger("state", state);
+            currentAnimationState = state; 
+        }
+    }
+
 
 
     public void CreatePlayer()
@@ -72,6 +97,8 @@ public class PlayerController : MonoBehaviour {
 		gameObject.transform.position = new Vector3(-8.5f, 0, 0);
         sr = gameObject.AddComponent<SpriteRenderer>();
         sr.sprite = playerSprite;
+        an = gameObject.AddComponent<Animator>();
+        an.runtimeAnimatorController = playerAnimation;
         rb = gameObject.AddComponent<Rigidbody2D>();
 
         rb.freezeRotation = true;
@@ -84,7 +111,8 @@ public class PlayerController : MonoBehaviour {
     }
 	
 	public void ResetPlayer() {
-		Destroy(sr);
+        Destroy(an);
+        Destroy(sr);
 		Destroy(rb);
 		exist = false;
 	}
