@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     int currentAnimationState;
 	
 	static int JUMP_START = 14;
-	static float JUMP_MULTI = 12f;
+	static float JUMP_MULTI = 8.5f;
 
 
     // Use this for initialization
@@ -62,6 +62,10 @@ public class PlayerController : MonoBehaviour {
             {
                 if (!ceilingHead) ceilingHead = true;
                 else jumping = 0;
+            }
+            if (jumping > 0)
+            {
+                ChangeState(2);
             }
 
 			 

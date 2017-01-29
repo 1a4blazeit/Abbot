@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 504076bb07567954897ecf63e9ab514c
-timeCreated: 1485578003
+guid: 409f9b94f4f064b4d892874a607dcace
+timeCreated: 1485662797
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: PlayerSheet_0
     21300002: PlayerSheet_1
+    21300004: PlayerSheet_2
+    21300006: PlayerSheet_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -97,6 +99,32 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
+        y: 0
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerSheet_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerSheet_3
+      rect:
+        serializedVersion: 2
+        x: 48
         y: 0
         width: 12
         height: 16
